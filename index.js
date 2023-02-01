@@ -12,6 +12,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'pages');
+app.use(express.json());
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(
@@ -47,7 +48,8 @@ app.delete('/:id', async (req, res) => {
 });
 
 app.put('/:id', async (req, res) => {
-  await editNote(req.params.id);
+  await editNote(req.params.id, req.body.title);
+  console.log(req.body.title);
   res.render('index', {
     title: 'Express app',
     notes: await getNotes(),

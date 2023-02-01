@@ -37,7 +37,7 @@ async function removeNote(id) {
 async function editNote(id, newText) {
   const notes = await getNotes();
   const noteIndex = notes.findIndex((note) => note.id === id);
-  notes[noteIndex].text = newText;
+  notes[noteIndex].title = newText;
   await fs.writeFile(notesPath, JSON.stringify(notes));
   console.log(chalk.bgBlue('Edited'));
 }
